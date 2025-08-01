@@ -21,8 +21,10 @@ struct ContentView: View {
                 Image(monty.playerWins ? "winner_image" : "loser_image")
                     .resizable()
                     .scaledToFit()
-                    .opacity(monty.gameOver ? 1 : 0)
-                    .animation(.easeIn, value: monty.gameOver)
+                    .offset(y: monty.gameOver ? 0 : -200)
+                        .opacity(monty.gameOver ? 1 : 0)
+                        // winner loser animation
+                        .animation(.spring(response: 0.5, dampingFraction: 0.7), value: monty.gameOver)
                 
                 // 3 cards animated in a zstack
                 ZStack {
