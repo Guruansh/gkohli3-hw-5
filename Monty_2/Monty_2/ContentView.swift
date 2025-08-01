@@ -39,14 +39,39 @@ struct ContentView: View {
                     }
                 }
                 
-                // new game button
-                Button("New Game") {
-                    monty.newGame()
+                // Creating Control Strip
+                HStack(spacing: 30) {
+                    
+                    // Player & House scores
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Player: \(monty.playerPoints)")
+                            .font(.headline)
+                        Text("House:  \(monty.housePoints)")
+                            .font(.headline)
+                    }
+
+                    Spacer()
+
+                    // Reset button
+                    Button("Reset") {
+                        monty.resetRound()
+                    }
+                    .font(.system(size: 20, weight: .semibold))
+                    .disabled(!monty.gameOver)
+
+                    // New Game button
+                    Button("New Game") {
+                        monty.newGame()
+                    }
+                    .font(.system(size: 20, weight: .semibold))
+                    .disabled(monty.gameOver)
+
                 }
-                .font(.system(size: 24, weight: .bold))
-                .padding(.horizontal, 40)
-                .padding(.vertical, 10)
-                .foregroundColor(.black)
+                .padding(.vertical, 8)
+                .padding(.horizontal)
+                .background(Color.white.opacity(0.2))
+                .cornerRadius(12)
+
             }
             .padding()
                 

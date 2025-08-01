@@ -17,6 +17,10 @@ enum CardState {
 
 // Monty game logic
 class Monty: ObservableObject {
+    
+    // to track scores
+    @Published var playerPoints = 0
+    @Published var housePoints = 0
 
     @Published var cardStates: [CardState] = [.faceDown, .faceDown, .faceDown]
     @Published var gameOver = false
@@ -42,5 +46,19 @@ class Monty: ObservableObject {
         gameOver = true
         playerWins = (index == aceIndex)
         cardStates[index] = .faceUp
+        
+        // Awarding 3 points
+                if playerWins {
+                    playerPoints += 3
+                } else {
+                    housePoints += 3
+                }
     }
+    
+    // Resting the game
+        func resetRound() {
+            cardStates = [.faceDown, .faceDown, .faceDown]
+            gameOver = false
+            playerWins = false
+        }
 }
